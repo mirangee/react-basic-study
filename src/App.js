@@ -24,9 +24,16 @@ function App() {
     },
   ];
 
+  // ExpenseForm에게 내려보낼 함수
+  const addExpenseHandler = (newExpense) => {
+    console.log('App 컴포넌트에서 응답함!');
+    console.log(`newExpense: `, newExpense);
+  };
+
   return (
     <>
-      <NewExpense />
+      {/* 자바스크립트에서는 함수도 객체이다. 이렇게 함수를 전달하면 함수의 주소값을 가진 객체가 전달된다. */}
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
     </>
   );

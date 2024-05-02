@@ -11,7 +11,6 @@ const ExpenseForm = ({ onSaveExpense }) => {
   const titleChangeHandler = (e) => {
     // userInput이 객체 형태이기 때문에 기존값은 유지하면서
     // 이벤트가 발생한 입력창의 값만 변경하는 로직
-
     setUserInput((prevUserInput) => {
       return {
         ...prevUserInput, // spread 문법으로 기존 값은 그대로 복사

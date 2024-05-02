@@ -27,19 +27,29 @@ const Expenses = ({ items }) => {
     setFilteredYear(selectedYear);
   };
 
+  // 사용자가 선택한 연도에 맞는 item만 필터함
+  const filteredItems = items.filter(
+    (item) => item.date.getFullYear().toString() === filteredYear,
+  );
+  console.log(filteredItems);
+
+  // 조건부 렌더링을 위한 변수
+  let expenseContent = <p>아직 등록된 지출이 없습니다</p>;
+
+  if (filteredItems.length > 0) {
+    expenseContent = filteredItems.map((item) => (
+      <ExpenseItem
+        key={item.id}
+        title={item.title}
+        price={item.price}
+        date={item.date}
+      />
+    ));
+  }
   return (
     <Card className="expenses">
       <ExpenseFilter onChangeFilter={filterChangeHandler} />
-      {items
-        .filter((item) => item.date.getFullYear().toString() === filteredYear)
-        .map((item) => (
-          <ExpenseItem
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            date={item.date}
-          />
-        ))}
+      {expenseContent}
     </Card>
   );
 };

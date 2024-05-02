@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Expenses from './components/Expense/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
@@ -33,18 +33,29 @@ function App() {
     },
   ];
 
+  // 지출 객체배열을 상태변수로 관리
+  const [expenseList, setExpenseList] = useState(expenses);
+
   // ExpenseForm에게 내려보낼 함수
   const addExpenseHandler = (newExpense) => {
     console.log('App 컴포넌트에서 응답함!');
     console.log(`newExpense: `, newExpense);
-    expenses.push(newExpense);
+
+    const modifyExpense = {
+      ...newExpense,
+      id: expenseList[expenseList.length - 1].id + 1,
+    };
+    console.log(modifyExpense);
+
+    setExpenseList([...expenseList, modifyExpense]); // 기존 배열을 유지한 상태에서 새로운 배열 추가해야 함
   };
 
   return (
     <>
       {/* 자바스크립트에서는 함수도 객체이다. 이렇게 함수를 전달하면 함수의 주소값을 가진 객체가 전달된다. */}
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
+      <Expenses items={expenseList} />
+      {/* 상태변수인 expenseList를 전달해야 새롭게 렌더링이 된다 */}
     </>
   );
 }

@@ -36,7 +36,13 @@ const ExpenseForm = ({ onSaveExpense }) => {
   const formSubmitHandler = (e) => {
     e.preventDefault(); //submit 차단(submit이 발동하면 동기 방식으로 요청을 보내므로 차단)
 
-    onSaveExpense(userInput); //부모 component인 App.js가 내려준 함수를 호출하면서, 올리고자 하는 데이터를 매개값으로 전달한다.
+    const newExpense = {
+      title: userInput.title,
+      price: userInput.price,
+      date: new Date(userInput.date),
+    };
+
+    onSaveExpense(newExpense); //부모 component인 App.js가 내려준 함수를 호출하면서, 올리고자 하는 데이터를 매개값으로 전달한다.
 
     // 입력창 리셋
     setUserInput({

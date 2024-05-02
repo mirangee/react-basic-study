@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate';
-import Card from './UI/Card';
+import Card from '../UI/Card';
 
 const ExpenseItem = ({ title, price, date }) => {
   // 숫자를 화폐 표기법으로 바꾸기

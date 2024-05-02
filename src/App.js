@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Expenses from './components/Expenses';
-import Hello from './Hello';
+import Expenses from './components/Expense/Expenses';
+import NewExpense from './components/NewExpense/NewExpense';
 
 function App() {
   //지출 항목 객체 배열
@@ -26,6 +26,7 @@ function App() {
 
   return (
     <>
+      <NewExpense />
       <Expenses items={expenses} />
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = ({ onSaveExpense }) => {
+const ExpenseForm = ({ onSaveExpense, onToggle }) => {
   const [userInput, setUserInput] = useState({
     title: '',
     price: '',
@@ -52,6 +52,8 @@ const ExpenseForm = ({ onSaveExpense }) => {
     });
   };
 
+  const cancleInsertHandler = () => onToggle();
+
   return (
     // form 태그의 경우 button type이 submit일 때 onSubmit 이벤트를 바로 걸 수 있다.
     <form onSubmit={formSubmitHandler}>
@@ -86,6 +88,9 @@ const ExpenseForm = ({ onSaveExpense }) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={cancleInsertHandler}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>

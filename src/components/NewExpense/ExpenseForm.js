@@ -38,7 +38,7 @@ const ExpenseForm = ({ onSaveExpense, onToggle }) => {
 
     const newExpense = {
       title: userInput.title,
-      price: userInput.price,
+      price: +userInput.price, // String이 아닌 정수로 받기 위해 +를 붙인다
       date: new Date(userInput.date),
     };
 

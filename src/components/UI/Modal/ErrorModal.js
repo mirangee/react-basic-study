@@ -3,24 +3,43 @@ import styles from './ErrorModal.module.css';
 import Card from '../Card';
 import Button from '../Button/Button';
 
-// Modal을 사용하는 쪽에서 모달 제목과 메시지가 props로 전달될 것이다.
-// onConfirm -> AddUsers 쪽에서 상태관리하고 있는 모달 노출 여부 제어 함수
-// onConfirm 함수가 호출되면 상태관리 변수가 null 값이 된다.
+// portal 기능을 사용하기 위한 import
+import ReactDOM from 'react-dom';
+
+const BackDrop = ({ onConfirm }) => {
+  return <div className={styles.backdrop} onClick={onConfirm} />;
+};
+
+const ModalOverlay = ({ title, message, onConfirm }) => {
+  return (
+    <Card className={styles.modal}>
+      <header className={styles.header}>
+        <h2>{title}</h2>
+      </header>
+      <div className={styles.content}>
+        <p>{message}</p>
+      </div>
+      <footer className={styles.actions}>
+        <Button onClick={onConfirm}>Okay</Button>
+      </footer>
+    </Card>
+  );
+};
+
+// ReactDOM 기능 사용을 위한 createPortal 메서드
+// 매개변수 2개 필요하다. 1) 컴포넌트, 2) 목적지
 const ErrorModal = ({ title, message, onConfirm }) => {
   return (
     <>
-      <div className={styles.backdrop} onClick={onConfirm} />
-      <Card className={styles.modal}>
-        <header className={styles.header}>
-          <h2>{title}</h2>
-        </header>
-        <div className={styles.content}>
-          <p>{message}</p>
-        </div>
-        <footer className={styles.actions}>
-          <Button onClick={onConfirm}>Okay</Button>
-        </footer>
-      </Card>
+      {ReactDOM.createPortal(
+        <BackDrop onConfirm={onConfirm} />,
+        document.getElementById('backdrop-root'),
+      )}
+
+      {ReactDOM.createPortal(
+        <ModalOverlay title={title} message={message} onConfirm={onConfirm} />,
+        document.getElementById('overlay-root'),
+      )}
     </>
   );
 };

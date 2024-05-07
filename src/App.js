@@ -5,6 +5,7 @@ import Login from './components/SideEffect/Login/Login';
 import Home from './components/SideEffect/Home/Home';
 
 const App = () => {
+  console.log('App.js 컴포넌트 실행');
   // 로그인 상태를 관리하는 변수
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,6 +38,8 @@ const App = () => {
     localStorage.removeItem('login-flag');
     setIsLoggedIn(false);
   };
+
+  console.log('App.js 컴포넌트 끝');
 
   return (
     <>

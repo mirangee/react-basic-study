@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './CartItem.module.scss';
+import CartContext from '../../store/cart-context';
 
-const CartItem = ({ key, cart }) => {
+const CartItem = ({ cart }) => {
   const { name, price, amount } = cart;
   const formatPrice = new Intl.NumberFormat('ko-KR').format(price);
+
+  const { addItem } = useContext(CartContext);
+
+  // + 버튼 누르면 무조건 하나만 올려주면 된다
+  const cartAddItemHandler = () => {
+    // addItem은 앞에서 작성한 담기 기능에 사용한 함수
+    // 지금은 항목 추가가 아닌, 기존 항목의 수량만 하나 늘리려는 것
+    addItem({ ...cart, amount: 1 });
+  };
 
   const {
     'cart-item': cartItem,
@@ -22,8 +32,8 @@ const CartItem = ({ key, cart }) => {
         </div>
       </div>
       <div className={actions}>
-        <button>+</button>
         <button>-</button>
+        <button onClick={cartAddItemHandler}>+</button>
       </div>
     </li>
   );

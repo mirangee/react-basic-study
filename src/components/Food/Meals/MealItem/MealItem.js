@@ -16,7 +16,7 @@ const MealItem = ({ id, price, description, name }) => {
       price: +price,
       amount: +amount,
     };
-    addItem(item); //CartProvider에서 온 addItem의 매개값으로 해당 tiem을 보냄
+    addItem(item); //CartProvider에서 온 addItem의 매개값으로 해당 item을 보냄
   };
 
   const { meal, description: desc, price: priceStyle } = styles;
